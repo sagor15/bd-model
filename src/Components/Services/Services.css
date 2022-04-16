@@ -1,0 +1,15 @@
+.item-img {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    margin: 0 auto;
+  }
+  .item-div {
+    margin: 0 auto;
+    /* border: 1px solid rgb(165, 76, 230); */
+    box-shadow: 3px 3px 5px 6px #ccc;
+    border-radius: 15px;
+    width: 350px;
+    height: 450px;
+    padding: 10px;
+  }

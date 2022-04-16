@@ -1,0 +1,36 @@
+.navber a{
+ text-decoration: none;
+ padding-right: 20px;
+ font-size: 20px;
+}
+.navber a:hover{
+    color: rgb(142, 170, 248);
+    text-shadow: 2px 7px 5px rgba(0,0,0,0.3), 
+    0px -4px 10px rgba(255,255,255,0.3);
+}
+.header{
+    background-color: rgb(255, 254, 254);
+    box-shadow: 0 4px 4px rgb(155, 151, 151);
+}
+.mehe-shadow{
+    text-shadow: 2px 7px 5px rgba(0,0,0,0.3), 
+    0px -4px 10px rgba(255,255,255,0.3);
+}
+.login{
+    padding-left: 17px;
+    padding-bottom: 5px;
+}
+
+@media screen and (max-width:600px){
+    .mehe-shadow{
+        text-align: center;
+        padding-bottom: 20px;
+    }
+    .navber a{
+        margin-left: 10px;
+        font-weight: bold;
+    }
+    /* .header{
+        display: inline-block;
+    } */
+}

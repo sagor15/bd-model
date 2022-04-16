@@ -2,47 +2,47 @@
     {
       "id": "124e13b9-2d54-4b2f-a74d-a77b362d6ead",
       "name": "Mehejabin Chowdhury",
-      "filmName": "Boro chele",
+      "filmName": "Advertising",
       "price": 420,
-      "ratings": 4,
+      
       "img": "https://i.ibb.co/qyMJPDm/actor1.png",
       "description": "this is famouse drama in 2020 . name of drama 'boro chele ' ."
     },
     {
         "id": "124e13b9-2d54-4b2f-a74d-a77b362d6ead",
         "name": "Mehejabin Chowdhury",
-        "filmName": "",
+        "filmName": "Tv Show",
         "price": 420,
-        "ratings": 4,
+        
         "img": "https://i.ibb.co/PmL4t49/actor3.png",
-        "shipping": 1
+        "description": " "
       },
       {
         "id": "124e13b9-2d54-4b2f-a74d-a77b362d6ead",
         "name": "Mehejabin Chowdhury",
-        "filmName": "",
+        "filmName": "Theater",
         "price": 420,
-        "ratings": 4,
+        
         "img": "https://i.ibb.co/TtdD3dL/actor2.png",
-        "shipping": 1
+        "description": " "
       },
       {
         "id": "124e13b9-2d54-4b2f-a74d-a77b362d6ead",
         "name": "Mehejabin Chowdhury",
-        "filmName": "",
+        "filmName": "Drama",
         "price": 420,
-        "ratings": 4,
+        
         "img": "https://i.ibb.co/n0Yp3jY/actor5.png",
-        "shipping": 1
+        "description": " "
       },
       {
         "id": "124e13b9-2d54-4b2f-a74d-a77b362d6ead",
         "name": "Mehejabin Chowdhury",
-        "filmName": "",
+        "filmName": "National Event",
         "price": 420,
-        "ratings": 4,
+        
         "img": "https://i.ibb.co/RSVbwRJ/actor6.png",
-        "shipping": 1
+        "description": " "
       }
 ]
 

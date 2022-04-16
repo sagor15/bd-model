@@ -1,0 +1,14 @@
+.homeRightContainer img{
+    width: 400px;
+    height: auto;
+    border-radius: 50%;
+}
+.home-btn{
+    background-color: #B0B1F7;
+    color: white;
+    font-size: 20px;
+    padding: 10px 65px;
+    margin: 47px;
+    margin-top: 60px;
+    border-radius: 30px;
+}
