@@ -2,9 +2,11 @@ import React from 'react';
 import "./Login.css";
 import Icon from "../../img/icon/google.png"
 import { useNavigate } from 'react-router-dom';
+import { GoogleAuthProvider,signInWithPopup } from 'firebase/auth';
+import auth from '../../firbase-init';
 
 
-    
+const provider = new GoogleAuthProvider();
 
 
 const Login = () => {
@@ -13,6 +15,17 @@ const Login = () => {
         navigate('/signup');
         console.log('ami asi')
     }
+
+    const googleAuth = () =>{
+        signInWithPopup(auth, provider)
+        .then((result) => {
+          const user = result.user;
+          console.log(user)
+        }).catch((error) => {
+          const errorMessage = error.message; 
+        });
+    }
+       
     return (
         <div>
             <div className='loginContainer'>
@@ -37,7 +50,7 @@ const Login = () => {
                 <div className='OrSection'>
                    <p>Or</p>
 
-                   <div className='google'>
+                   <div onClick={googleAuth} className='google'>
                        <p><img src={Icon} alt="" /> SignIn with google</p>
                    </div>
                 </div>
