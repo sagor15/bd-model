@@ -2,7 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import Icon from "../../img/icon/google.png";
 import "./SignUp.css";
-import {  GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import {  createUserWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import auth from '../../firbase-init';
 
 
@@ -27,17 +27,38 @@ const googleAuth = () =>{
     });
 }
    
+    const handleSignUpSubmit =(event)=>{
+        event.preventDefault();
+        const email = event.target.email.value;
+        const password = event.target.password.value;
+        console.log( password ,email)
 
+        createUserWithEmailAndPassword(auth, email, password)
+            .then((userCredential) => {
+                // Signed in 
+                const user = userCredential.user;
+                // ...
+            })
+            .catch((error) => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                console.log(errorMessage);
+            });
+
+            navigate("/");
+    }
+
+   
 
 
     return (
         <div>
             <div className='loginContainer'>
                 <h1 className='text-5xl text-center text-indigo-500 py-5 mb-4'>Sign Up</h1>
-                <form >
+                <form  onSubmit={handleSignUpSubmit}>
                 <div className='loginContainer1'>
-                        <label htmlFor="email">Name</label> <br />
-                        <input type="text" name="email" id="" />
+                        <label htmlFor="name">Name</label> <br />
+                        <input type="text" name="name" id="" required />
                     </div>
                     <div className='loginContainer1'>
                         <label htmlFor="email">Email</label> <br />
