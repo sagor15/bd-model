@@ -12,3 +12,22 @@
     margin-top: 60px;
     border-radius: 30px;
 }
+
+@media screen and (max-width:600px) {
+    .homeRightContainer img{
+       
+        margin-left: 0 auto;
+        
+    }
+    .homeContainer{
+        width: 100%;
+        margin: 0 auto;
+    }
+    .homeHone{
+        text-align: center;
+    }
+    .home-btn{
+        margin: 80px;
+        margin-top: 60px;
+    }
+}

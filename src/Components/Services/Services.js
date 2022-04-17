@@ -11,7 +11,7 @@ const Services = () => {
     },[])
     return (
         <div>
-      <h1 className="text-6xl py-12 text-center">I provid services</h1>
+      <h1 className="text-6xl py-12 text-center">I provide services</h1>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8 py-5  ">
         {service.map((item) => (
           <div className="item-div ">
@@ -21,8 +21,8 @@ const Services = () => {
               <h2 className='text-center py-2 text-xl'>{item.filmName}</h2>
               <p className="py-2 text-xl">" {item.description} "</p>
             </div>
-            <div>
-                <button>Cheak Out</button>
+            <div className=''>
+                <button className='service-btn'>Cheak Out</button>
             </div>
           </div>
         ))}

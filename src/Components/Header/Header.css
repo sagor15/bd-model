@@ -27,10 +27,16 @@
         padding-bottom: 20px;
     }
     .navber a{
-        margin-left: 10px;
+        margin-left: 2px;
         font-weight: bold;
+        margin-right: 2px;
     }
-    /* .header{
-        display: inline-block;
-    } */
+    .header{
+        width: 100%;
+        box-sizing: border-box;
+    }
+    .login{
+        padding-left: 2px;
+        padding-bottom: 5px;
+    }
 }
