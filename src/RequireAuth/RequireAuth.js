@@ -1,25 +1,19 @@
-// import React from 'react';
-// import { Navigate, useLocation } from 'react-router-dom';
-// import auth from '../firbase-init';
-// // import Auth from "../firbase-init";
+import React from 'react';
+import {useAuthState} from "react-firebase-hooks/auth";
+import { Navigate, useLocation } from 'react-router-dom';
+import auth from "../firbase-init"
 
-// const RequireAuth = ({ children }) => {
-//     return (
-//         // const auth = useAuth()
-//     //     auth
-//     //    location = useLocation() ;
+const RequireAuth = ({children}) => {
+    const [user,loading] = useAuthState(auth);
+    const location = useLocation();
 
-//     if (!auth.user) {
-//         // Redirect them to the /login page, but save the current location they were
-//         // trying to go to when they were redirected. This allows us to send them
-//         // along to that page after they login, which is a nicer user experience
-//         // than dropping them off on the home page.
-//         return <Navigate to="/login" state={{ from: location }} replace />;
-//     }
+    if(loading){
+        return <h3>Loading...</h3>
+    }
+    if(!user){
+        return <Navigate to="/login" state = {{from:location}} replace></Navigate>
+    }
+    return children;
+};
 
-//     return children;
-// }
-//     );
-// };
-
-// export default RequireAuth;
+export default RequireAuth;

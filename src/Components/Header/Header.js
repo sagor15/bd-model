@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import "./Header.css";
 import {  onAuthStateChanged, signOut } from "firebase/auth";
 import auth from "../../firbase-init";
@@ -26,11 +26,15 @@ const Header = () => {
             // An error happened.
           });
     }
+    const navigate = useNavigate();
+    const handletittle = () =>{
+      navigate("/");
+    }
    
     return (
         <div className='flex-none justify-around items-center py-4 md:flex-1 sm:flex header'>
-            <div className='text-4xl text-indigo-500/75 mehe-shadow'>
-                <span>Mehejabin</span>
+            <div onClick={handletittle} className='text-4xl text-indigo-500/75 mehe-shadow'>
+                <span>Mehejabin.Model</span>
             </div>
             <nav className='navber'>
                 <Link to='/'>Home</Link>

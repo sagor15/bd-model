@@ -23,7 +23,9 @@ function App() {
           <Route path='/signup' element={<SignUp></SignUp>}></Route>
           <Route path='/about' element={<About></About>}></Route>
           <Route path='/cheakout' element={
-            <Cheakout></Cheakout>
+            <RequireAuth>
+              <Cheakout></Cheakout>
+            </RequireAuth>
           }></Route>
         </Routes>
         <Footer></Footer>

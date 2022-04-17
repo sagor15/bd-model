@@ -1,7 +1,7 @@
 import React from 'react';
 import "./Login.css";
 import Icon from "../../img/icon/google.png"
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { GoogleAuthProvider, signInWithEmailAndPassword, signInWithPopup } from 'firebase/auth';
 import auth from '../../firbase-init';
 
@@ -11,15 +11,22 @@ const provider = new GoogleAuthProvider();
 
 const Login = () => {
     const navigate = useNavigate();
+    const location = useLocation();
+    const from = location.state?.from?.pathname || "/";
+
+    
+
+
     const handleSignup = () => {
+        
         navigate('/signup');
-        console.log('ami asi')
     }
 
     const googleAuth = () => {
         signInWithPopup(auth, provider)
             .then((result) => {
                 const user = result.user;
+                navigate(from , {replace: true});
                 console.log(user)
             }).catch((error) => {
                 const errorMessage = error.message;
@@ -34,16 +41,17 @@ const Login = () => {
 
         signInWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
-                // Signed in 
+                
                 const user = userCredential.user;
-                // ...
+                navigate(from , {replace: true});
+                
             })
             .catch((error) => {
                 const errorCode = error.code;
                 const errorMessage = error.message;
                 console.log(errorMessage)
             });
-            navigate("/services");
+            navigate(from , {replace: true});
     }
 
     return (
