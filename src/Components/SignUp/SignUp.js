@@ -2,8 +2,13 @@ import React, { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import Icon from "../../img/icon/google.png";
 import "./SignUp.css";
-import {  createUserWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import {  GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import auth from '../../firbase-init';
+import { useCreateUserWithEmailAndPassword, useUpdateProfile } from 'react-firebase-hooks/auth';
+// import { async } from '@firebase/util';
+import Loading from '../Blog/Loading/Loading';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 
@@ -19,7 +24,29 @@ const SignUp = () => {
         navigate('/login');
         
     }
-    const [error , setError] = useState();
+    // const [agree , setAgree] = useState(false);
+    const [
+        createUserWithEmailAndPassword,
+        user,
+        loading,
+        
+      ] = useCreateUserWithEmailAndPassword(auth , {sendEmailVerification: true});
+
+      const [updateProfile, updating, error] = useUpdateProfile(auth);
+
+
+
+      if(loading || updating){
+        return <Loading></Loading>
+    }
+
+
+      if(user){
+        console.log("user" , user)
+      }
+   
+
+    
 const googleAuth = () =>{
     signInWithPopup(auth, provider)
     .then((result) => {
@@ -30,28 +57,18 @@ const googleAuth = () =>{
     });
 }
    
-    const handleSignUpSubmit =(event)=>{
+    const handleSignUpSubmit = async (event)=>{
         event.preventDefault();
+        const name = event.target.name.value;
         const email = event.target.email.value;
         const password = event.target.password.value;
         console.log( password ,email)
 
         
-            createUserWithEmailAndPassword(auth, email, password)
-            .then((userCredential) => {
-                const user = userCredential.user;
-                setError("");
-                navigate(from , {replace: true});
-            })
-            .catch((error) => {
-                const errorCode = error.code;
-                const errorMessage = error.message;
-                setError(errorMessage);
-            });
-            navigate(from , {replace: true});
-        
-        
-            
+       await createUserWithEmailAndPassword(email, password);
+       await updateProfile({ displayName: name });
+          alert('veryfi your email');
+          navigate('/')         
     }
 
    
@@ -74,7 +91,7 @@ const googleAuth = () =>{
                         <label htmlFor="password">Password</label> <br />
                         <input type="password" name="password" id="" />
                     </div>
-                    <p className='text-center'>{error}</p>
+                    {/* <p className='text-center'>{error}</p> */}
                     <div className='loginBtnContainer'>
                         <button  className="btn">Sign Up</button>
                     </div>
@@ -91,6 +108,7 @@ const googleAuth = () =>{
                     </div>
                 </div>
             </div>
+            <ToastContainer />
         </div>
     );
 };

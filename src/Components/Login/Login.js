@@ -4,10 +4,10 @@ import Icon from "../../img/icon/google.png"
 import { useLocation, useNavigate } from 'react-router-dom';
 import { GoogleAuthProvider, sendSignInLinkToEmail, signInWithEmailAndPassword, signInWithPopup } from 'firebase/auth';
 import auth from '../../firbase-init';
+import Loading from "../../Components/Blog/Loading/Loading";
 import { ToastContainer, toast } from 'react-toastify';
-
-  import 'react-toastify/dist/ReactToastify.css';
-import { useUpdateEmail } from 'react-firebase-hooks/auth';
+import 'react-toastify/dist/ReactToastify.css';
+import { useSendPasswordResetEmail, useSignInWithEmailAndPassword, useUpdateEmail } from 'react-firebase-hooks/auth';
 // import { async } from '@firebase/util';
 
 
@@ -21,6 +21,29 @@ const Login = () => {
     const location = useLocation();
     const from = location.state?.from?.pathname || "/";
 
+    const [
+        signInWithEmailAndPassword,
+        user,
+        loading,
+        error,
+      ] = useSignInWithEmailAndPassword(auth);
+
+      const [sendPasswordResetEmail, sending] = useSendPasswordResetEmail(
+        auth
+      );
+
+      if(loading || sending){
+          return <Loading></Loading>
+      }
+
+      if(user){
+        navigate(from , {replace: true});
+      }
+
+      let errorElement;
+      if(error){
+          errorElement = <p className='text-danger'>Error : {error?.message}</p>
+      }
 
     const handleSignup = () => {
         
@@ -38,6 +61,10 @@ const Login = () => {
                 const errorMessage = error.message;
             });
     }
+
+
+
+
     const handleSignInSubmit = (event) => {
         event.preventDefault();
 
@@ -45,23 +72,15 @@ const Login = () => {
         const password = event.target.password.value;
         console.log( password ,email)
 
-        signInWithEmailAndPassword(auth, email, password)
-            .then((userCredential) => {
-                
-                const user = userCredential.user;
-                console.log(user);
-                navigate(from , {replace: true});
-                
-            })
-            .catch((error) => {
-                const errorMessage = error.message;
-                setErrore(errorMessage);
-                
-            });
-            // navigate(from , {replace: true});
+        signInWithEmailAndPassword( email, password)
+            
     }
 
-    
+    const resetPassword = async (event)=>{
+        const email = event.current.value;
+        await sendPasswordResetEmail(email);
+        toast('send email');
+    }
 
     return (
         <div>
@@ -74,9 +93,9 @@ const Login = () => {
                     </div>
                     <div className='loginContainer1'>
                         <label htmlFor="password">Password</label> <br />
-                        <input type="password" name="password" id="" required />
+                        <input  type="password" name="password" id="" required />
                     </div>
-                    <p className='text-center'>{errore}</p>
+                    <p className='text-center'>{errorElement}</p>
                     <div className='loginBtnContainer'>
                         <button className="btn">Login</button>
                     </div>
@@ -86,7 +105,7 @@ const Login = () => {
                     <p>You have no account ? <button onClick={handleSignup}>Sign Up</button></p>
                 </div>
                 <div className='accountOrNot'>
-                    <p>Forget password ? <button >Reset</button></p>
+                    <p>Forget password ? <button onClick={resetPassword}>Reset</button></p>
                 </div>
                 <div className='OrSection'>
                     <p>Or</p>
@@ -96,7 +115,7 @@ const Login = () => {
                     </div>
                 </div>
             </div>
-            
+            <ToastContainer />
         </div>
     );
 };
