@@ -1,13 +1,14 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import "./Login.css";
 import Icon from "../../img/icon/google.png"
 import { useLocation, useNavigate } from 'react-router-dom';
-import { GoogleAuthProvider, signInWithEmailAndPassword, signInWithPopup } from 'firebase/auth';
+import { GoogleAuthProvider, sendSignInLinkToEmail, signInWithEmailAndPassword, signInWithPopup } from 'firebase/auth';
 import auth from '../../firbase-init';
+import { ToastContainer, toast } from 'react-toastify';
+
+  import 'react-toastify/dist/ReactToastify.css';
+import { useUpdateEmail } from 'react-firebase-hooks/auth';
 // import { async } from '@firebase/util';
-// import { useSendPasswordResetEmail } from 'react-firebase-hooks/auth';
-// import {  toast } from 'react-toastify';
-// import 'react-toastify/dist/ReactToastify.css';
 
 
 const provider = new GoogleAuthProvider();
@@ -15,23 +16,10 @@ const provider = new GoogleAuthProvider();
 
 
 const Login = () => {
-   
+    
     const navigate = useNavigate();
     const location = useLocation();
     const from = location.state?.from?.pathname || "/";
-
-
-    // const [sendPasswordResetEmail, sending] = useSendPasswordResetEmail(auth);
-
-    // const handleReset = async() => {
-    //     const email = emailRef.current.value;
-    //     if(email){
-    //       await sendPasswordResetEmail(email);
-    //       toast('Sent email');
-    //     }
-    //     else{
-    //       toast('Please enter your email address')
-    //     };
 
 
     const handleSignup = () => {
@@ -108,6 +96,7 @@ const Login = () => {
                     </div>
                 </div>
             </div>
+            <ToastContainer />
         </div>
     );
 };
