@@ -1,5 +1,5 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import Icon from "../../img/icon/google.png";
 import "./SignUp.css";
 import {  createUserWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
@@ -13,10 +13,13 @@ const provider = new GoogleAuthProvider();
 
 const SignUp = () => {
     const navigate = useNavigate();
+    const location = useLocation();
+    const from = location.state?.from?.pathname || "/";
     const handleLogin = () =>{
         navigate('/login');
         
     }
+    const [error , setError] = useState();
 const googleAuth = () =>{
     signInWithPopup(auth, provider)
     .then((result) => {
@@ -33,19 +36,22 @@ const googleAuth = () =>{
         const password = event.target.password.value;
         console.log( password ,email)
 
-        createUserWithEmailAndPassword(auth, email, password)
+        
+            createUserWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
-                // Signed in 
                 const user = userCredential.user;
-                // ...
+                setError("");
+                navigate(from , {replace: true});
             })
             .catch((error) => {
                 const errorCode = error.code;
                 const errorMessage = error.message;
-                console.log(errorMessage);
+                setError(errorMessage);
             });
-
-            navigate("/");
+            navigate(from , {replace: true});
+        
+        
+            
     }
 
    
@@ -68,8 +74,9 @@ const googleAuth = () =>{
                         <label htmlFor="password">Password</label> <br />
                         <input type="password" name="password" id="" />
                     </div>
+                    <p className='text-center'>{error}</p>
                     <div className='loginBtnContainer'>
-                        <button className="btn">Sign Up</button>
+                        <button  className="btn">Sign Up</button>
                     </div>
 
                 </form>

@@ -16,7 +16,7 @@ const provider = new GoogleAuthProvider();
 
 
 const Login = () => {
-    
+    const [errore, setErrore] = useState();
     const navigate = useNavigate();
     const location = useLocation();
     const from = location.state?.from?.pathname || "/";
@@ -49,14 +49,16 @@ const Login = () => {
             .then((userCredential) => {
                 
                 const user = userCredential.user;
+                console.log(user);
                 navigate(from , {replace: true});
                 
             })
             .catch((error) => {
                 const errorMessage = error.message;
+                setErrore(errorMessage);
                 
             });
-            navigate(from , {replace: true});
+            // navigate(from , {replace: true});
     }
 
     
@@ -74,9 +76,7 @@ const Login = () => {
                         <label htmlFor="password">Password</label> <br />
                         <input type="password" name="password" id="" required />
                     </div>
-                    {
-
-                    }
+                    <p className='text-center'>{errore}</p>
                     <div className='loginBtnContainer'>
                         <button className="btn">Login</button>
                     </div>
@@ -96,7 +96,7 @@ const Login = () => {
                     </div>
                 </div>
             </div>
-            <ToastContainer />
+            
         </div>
     );
 };
