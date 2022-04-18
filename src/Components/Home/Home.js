@@ -1,5 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import Other from '../Other/Other';
 import Services from '../Services/Services';
 import "./Home.css";
 
@@ -23,6 +24,7 @@ const Home = () => {
             </div>
             <div>
                 <Services></Services>
+                <Other></Other>
             </div>
         </div>
     );

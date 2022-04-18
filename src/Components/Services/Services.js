@@ -26,7 +26,8 @@ const Services = ({children}) => {
             <div className="py-5 pb-5 ">
               <h1 className="text-3xl">{item.name}</h1>
               <h2 className='text-center py-2 text-xl'>{item.filmName}</h2>
-              <p className="py-2 text-xl">" {item.description} "</p>
+              <p className="py-2 text-xl">{item.description} "</p>
+              <p className='py-2 text-xl text-center'>Price :${item.price}</p>
             </div>
             <div className=''>
                 <button className='service-btn' onClick={handleCheakout}>Cheak Out</button>

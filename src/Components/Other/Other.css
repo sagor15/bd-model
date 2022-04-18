@@ -1,0 +1,24 @@
+.otherContainer{
+    display: flex;
+    justify-content:space-around;
+    align-items: center;
+    box-shadow: 3px 3px 5px 6px #ccc;
+    padding: 20px 0;
+    background-color: #B0B1F7;
+    color: white;
+}
+.otherImg img{
+    width: 70%;
+    height: auto;
+    border-radius: 50%;
+}
+.otherRight {
+    width: 754px;
+    line-height: 2.5;
+}
+.otherRight p{
+    font-size: 20px;
+}
+.other{
+    margin-top: 200px;
+}
