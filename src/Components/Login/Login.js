@@ -1,26 +1,44 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import "./Login.css";
 import Icon from "../../img/icon/google.png"
 import { useLocation, useNavigate } from 'react-router-dom';
 import { GoogleAuthProvider, signInWithEmailAndPassword, signInWithPopup } from 'firebase/auth';
 import auth from '../../firbase-init';
+// import { async } from '@firebase/util';
+// import { useSendPasswordResetEmail } from 'react-firebase-hooks/auth';
+// import {  toast } from 'react-toastify';
+// import 'react-toastify/dist/ReactToastify.css';
 
 
 const provider = new GoogleAuthProvider();
 
 
+
 const Login = () => {
+   
     const navigate = useNavigate();
     const location = useLocation();
     const from = location.state?.from?.pathname || "/";
 
-    
+
+    // const [sendPasswordResetEmail, sending] = useSendPasswordResetEmail(auth);
+
+    // const handleReset = async() => {
+    //     const email = emailRef.current.value;
+    //     if(email){
+    //       await sendPasswordResetEmail(email);
+    //       toast('Sent email');
+    //     }
+    //     else{
+    //       toast('Please enter your email address')
+    //     };
 
 
     const handleSignup = () => {
         
         navigate('/signup');
     }
+   
 
     const googleAuth = () => {
         signInWithPopup(auth, provider)
@@ -47,26 +65,30 @@ const Login = () => {
                 
             })
             .catch((error) => {
-                const errorCode = error.code;
                 const errorMessage = error.message;
-                console.log(errorMessage)
+                
             });
             navigate(from , {replace: true});
     }
 
+    
+
     return (
         <div>
             <div className='loginContainer'>
-                <h1 className='text-5xl text-center text-indigo-500 py-5 mb-4'>Login</h1>
+                <h1 className='text-5xl text-center text-indigo-500 py-2 mb-4'>Login</h1>
                 <form onSubmit={handleSignInSubmit}>
                     <div className='loginContainer1'>
                         <label htmlFor="email">Email</label> <br />
-                        <input type="email" name="email" id="" />
+                        <input type="email" name="email" id="" required  />
                     </div>
                     <div className='loginContainer1'>
                         <label htmlFor="password">Password</label> <br />
-                        <input type="password" name="password" id="" />
+                        <input type="password" name="password" id="" required />
                     </div>
+                    {
+
+                    }
                     <div className='loginBtnContainer'>
                         <button className="btn">Login</button>
                     </div>
@@ -74,6 +96,9 @@ const Login = () => {
                 </form>
                 <div className='accountOrNot'>
                     <p>You have no account ? <button onClick={handleSignup}>Sign Up</button></p>
+                </div>
+                <div className='accountOrNot'>
+                    <p>Forget password ? <button >Reset</button></p>
                 </div>
                 <div className='OrSection'>
                     <p>Or</p>
@@ -86,5 +111,5 @@ const Login = () => {
         </div>
     );
 };
-
-export default Login;
+// };
+export default Login ;

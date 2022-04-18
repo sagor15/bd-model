@@ -2,6 +2,7 @@
 import { Routes,Route } from 'react-router-dom';
 import './App.css';
 import About from './Components/About/About';
+import Blog from './Components/Blog/Blog';
 import Cheakout from './Components/Cheakout/Cheakout';
 import Footer from './Components/Footer/Footer';
 import Header from './Components/Header/Header';
@@ -27,6 +28,7 @@ function App() {
               <Cheakout></Cheakout>
             </RequireAuth>
           }></Route>
+          <Route path='/blog' element={<Blog></Blog>}></Route>
         </Routes>
         <Footer></Footer>
     </div>

@@ -54,7 +54,7 @@ const googleAuth = () =>{
     return (
         <div>
             <div className='loginContainer'>
-                <h1 className='text-5xl text-center text-indigo-500 py-5 mb-4'>Sign Up</h1>
+                <h1 className='text-5xl text-center text-indigo-500 py-2 mb-2'>Sign Up</h1>
                 <form  onSubmit={handleSignUpSubmit}>
                 <div className='loginContainer1'>
                         <label htmlFor="name">Name</label> <br />
